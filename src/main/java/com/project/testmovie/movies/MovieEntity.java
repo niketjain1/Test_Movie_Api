@@ -1,5 +1,6 @@
 package com.project.testmovie.movies;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.testmovie.users.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 public class MovieEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false)
     private int id;
     @Column(name = "Title", nullable = false)
@@ -25,9 +26,10 @@ public class MovieEntity {
     @Column(name = "Rating", nullable = false)
     private double rating;
     @Column(name = "Release_Year", nullable = false)
-    private int release_year;
+    private int releaseYear;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 }

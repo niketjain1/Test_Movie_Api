@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -19,4 +20,10 @@ public class MovieController {
         var savedMovie = movieService.createMovie(movie, id);
         return ResponseEntity.created(URI.create("/users/" + savedMovie.getId() +"/movie/")).body(savedMovie);
     }
+
+    @GetMapping("/{userId}/movies")
+    public List<MovieEntity> getMoviesByUserId(@PathVariable("userId") int userId) {
+        return movieService.findAllMoviesByUserId(userId);
+    }
+
 }

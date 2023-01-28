@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", unique = true, nullable = false)
     private int id;
     @Column(name = "Username", nullable = false, unique = true)
@@ -27,7 +27,7 @@ public class UserEntity {
     @Column(name = "Password", nullable = false, unique = true)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,  cascade = CascadeType.ALL,
+    @OneToMany(targetEntity = MovieEntity.class,  cascade = CascadeType.ALL,
             mappedBy = "user")
-    private List<MovieEntity> movies = new ArrayList<>();
+    private List<MovieEntity> movies;
 }
